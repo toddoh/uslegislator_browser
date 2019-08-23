@@ -1,0 +1,260 @@
+.hero {
+    margin: 50px 30px 10px 30px;
+}
+
+table {
+    border-spacing: 0;
+    width: calc(100% - 60px);
+    margin: 15px 30px;
+    table-layout: fixed;
+}
+
+tr:nth-last-child td {
+    border-bottom: 0;
+}
+
+tr:nth-last-child th {
+    border-right: 0;
+}
+
+th, td {
+    margin: 0;
+    padding: 7px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+th:nth-last-child, td:nth-last-child {
+    border-right: 0;
+}
+
+tr:nth-child(1) th {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+th:nth-child(1) {
+    width: 60px;
+}
+
+th:nth-child(3) {
+    width: 12%;
+}
+
+th:nth-child(4) {
+    width: 15%;
+}
+
+th:nth-child(5), th:nth-child(6) {
+    width: 7%;
+}
+
+th:nth-child(1) .table__sortbutton {
+    display: none;
+}
+
+th .table__header {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+th .table__header>p {
+    margin-right: 7px;
+}
+
+.table__sortbutton.asc {
+    width: 15px;
+    height: 9px;
+    background-image: url('../resources/symbol_arrow_up.png');
+    background-size: cover;
+    flex-shrink: 0;
+    text-indent: -9999px;
+}
+
+.table__sortbutton.desc {
+    width: 15px;
+    height: 9px;
+    background-image: url('../resources/symbol_arrow_down.png');
+    background-size: cover;
+    flex-shrink: 0;
+    text-indent: -9999px;
+}
+
+.table__row_photo {
+    padding: 6px 0;
+    justify-content: center;
+    display: flex;
+}
+
+.table__row_photo>div {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.datafilter {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 30px;
+}
+
+.table__filter_party, .table__filter_state {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.table__filterbutton {
+    margin-right: 7px;
+    padding: 5px;
+}
+
+.table__filter_party[data-activeid=""] .table__filterbutton[data-id="All"] {
+    font-weight: 600;
+}
+
+.table__filter_party[data-activeid="Democrat"] .table__filterbutton[data-id="Democrat"] {
+    font-weight: 600;
+}
+
+.table__filter_party[data-activeid="Republican"] .table__filterbutton[data-id="Republican"] {
+    font-weight: 600;
+}
+
+.table__filter_party[data-activeid="Independent"] .table__filterbutton[data-id="Independent"] {
+    font-weight: 600;
+}
+
+.table__filterbutton[data-id="Democrat"] {
+    color: rgb(0, 73, 209);
+}
+
+.table__filterbutton[data-id="Republican"] {
+    color: rgb(209, 7, 0);
+}
+
+.table__filterbutton[data-id="Independent"] {
+    color: rgb(85, 85, 85);
+}
+
+.datafilter select {
+    display: block;
+    font-size: 14px;
+    font-family: sans-serif;
+    color: rgb(104, 104, 104);
+    padding: 7px 10px;
+    font-weight: 500;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid rgb(215, 215, 215);
+    border-radius: 4px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+}
+
+.table__filter_party>p, .table__filter_state>p {
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: rgb(87, 87, 87);
+}
+
+.datafilter select:hover {
+    border-color: #888;
+}
+
+.datafilter select:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+}
+
+.datafilter select option {
+    font-weight: normal;
+}
+
+.table__pagination {
+    width: calc(100% - 60px);
+    margin: 15px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.table__pagination>p {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.table__pagination .buttons {
+    display: flex;
+}
+
+.table__pagination button {
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #666666;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 7px 11px;
+    text-decoration: none;
+}
+
+.table__pagination .button__firstpage, .table__pagination .button__lastpage {
+    display: flex;
+}
+
+.table__pagination .button__firstpage {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.table__pagination .button__lastpage {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.table__pagination .button__left, .table__pagination .button__right {
+    border-radius: 0;
+}
+
+.table__pagination .button__nums {
+    background: #fff;
+    border-radius: 0;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #141414;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 11px;
+}
+
+.table__pagination .button__prev {
+    width: 9px;
+    height: 13px;
+    background-image: url('../resources/symbol_arrow_left.png');
+    background-size: cover;
+    flex-shrink: 0;
+    text-indent: -9999px;
+}
+
+.table__pagination .button__next {
+    width: 9px;
+    height: 13px;
+    background-image: url('../resources/symbol_arrow_right.png');
+    background-size: cover;
+    flex-shrink: 0;
+    text-indent: -9999px;
+}

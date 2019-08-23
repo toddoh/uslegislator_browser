@@ -1,0 +1,30 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "node": "current"
+                }
+            }
+        ],
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        "syntax-dynamic-import",
+        "babel-plugin-styled-components",
+        [
+            "babel-plugin-root-import",
+            {
+                "rootPathSuffix": "./src",
+                "rootPathPrefix": "~/"
+            }
+        ],
+        [
+            "@babel/plugin-proposal-class-properties",
+            {
+                "loose": true
+            }
+        ]
+    ]
+}
