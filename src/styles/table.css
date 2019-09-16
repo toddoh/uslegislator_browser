@@ -99,10 +99,20 @@ th .table__header>p {
     padding: 15px 30px;
 }
 
-.table__filter_party, .table__filter_state {
+.table__filter_party, .table__filter_state, .table__filter_textsearch, .table__filter_range {
     display: flex;
     flex-direction: column;
     margin-left: 15px;
+}
+
+.table__filter_textsearch input {
+    height: 33px;
+    padding: 0 10px;
+    background: #ebebeb;
+    border:none;
+    -webkit-appearance: none;
+    border-radius: 6px;
+    outline: none;
 }
 
 .table__filterbutton {
@@ -157,7 +167,7 @@ th .table__header>p {
     background-color: #fff;
 }
 
-.table__filter_party>p, .table__filter_state>p {
+.table__filter_party>p, .table__filter_state>p, .table__filter_textsearch>p, .table__filter_range>p {
     font-weight: 500;
     font-size: 13px;
     margin-bottom: 5px;

@@ -1,7 +1,9 @@
 import React, { lazy, Suspense, Fragment, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
+import { Provider } from 'react-redux'
 
+import store from './store/store'
 import BrowseTable from '~/components/table'
 import appstyle from '~/styles/app.css'
 
@@ -53,6 +55,8 @@ const App = () => {
 }
 
 ReactDOM.render(
-    <App />,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.querySelector("#app__root")
 );
