@@ -12,20 +12,23 @@ import TableFilterParty from './filterParty'
 import TableFilterState from './filterState'
 import TableSearch from './search'
 import TableRangeFilter from './range'
+import { filterData } from './filter'
 
 import store from '../store/store'
 import { ORIGINAL_DATA, RESTRUCTURED_DATA, PAGINATED_DATA, PAGINATION_NUM, RESTRUCTURED_COL, FILTER_BY_PARTY, FILTER_BY_STATE } from '../store/actiontypes'
 
-const BrowseTable = ({ data, originalData, restructuredData, paginatedData, paginationNum, restructuredColumns, filterPartyType, filterStateType }) => {
+const BrowseTable = ({ data, queries, originalData, restructuredData, paginatedData, paginationNum, restructuredColumns, filterPartyType, filterStateType }) => {
+    const [searchQueryParam, setsearchQueryParam] = useState(null)
 
     useEffect(() => {
         if (data) {
-            store.dispatch({type: FILTER_BY_PARTY, state: { data:  '' } })
-            store.dispatch({type: FILTER_BY_STATE, state: { data:  '' } })
+            const prefiltered = (queries.length > 0) ? filterData(data, queries[1], queries[0]) : data
+            store.dispatch({type: FILTER_BY_PARTY, state: { data:  queries[0] } })
+            store.dispatch({type: FILTER_BY_STATE, state: { data:  queries[1] } })
 
             var i, j, restructure_chunks = [], chunk = 7;
-            for (i = 0, j = data.length; i < j; i += chunk) {
-                restructure_chunks.push(data.slice(i, i + chunk))
+            for (i = 0, j = prefiltered.length; i < j; i += chunk) {
+                restructure_chunks.push(prefiltered.slice(i, i + chunk))
             }
 
             store.dispatch({type: ORIGINAL_DATA, state: { data:  data } })
@@ -45,6 +48,8 @@ const BrowseTable = ({ data, originalData, restructuredData, paginatedData, pagi
             store.dispatch({type: RESTRUCTURED_COL, state: { data: restructuredc } })
             store.dispatch({type: PAGINATED_DATA, state: { data:  restructure_chunks[0] } })
             store.dispatch({type: PAGINATION_NUM, state: { data:  0 } })
+
+            if (queries[2]) setsearchQueryParam(queries[2])
         }
     }, [data])
 
@@ -57,9 +62,9 @@ const BrowseTable = ({ data, originalData, restructuredData, paginatedData, pagi
 
             <div className={tbl.datafilter}>
                 <TableRangeFilter />
-                <TableSearch />
-                <TableFilterParty partytype={filterPartyType} />
-                <TableFilterState statetype={filterStateType} />
+                <TableSearch param={searchQueryParam} />
+                <TableFilterParty partytype={queries[0] || filterPartyType} />
+                <TableFilterState statetype={queries[1] || filterStateType} />
             </div>
             <table id='uslegislator'>
                 <tbody>

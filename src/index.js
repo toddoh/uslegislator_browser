@@ -2,6 +2,7 @@ import React, { lazy, Suspense, Fragment, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import { Provider } from 'react-redux'
+import queryString from 'query-string'
 
 import store from './store/store'
 import BrowseTable from '~/components/table'
@@ -9,9 +10,22 @@ import appstyle from '~/styles/app.css'
 
 const App = () => {
     const [legislatorData, setlegislatorData] = useState(null)
+    const [queries, setQueries] = useState([])
     const [isDataLoading, setIsDataLoading] = useState(false)
 
     useEffect(() => {
+        const query = queryString.parse(location.search)
+        if (typeof query == 'object') {
+            const queryParty = (query.party == 'dem') ? 'Democrat' : 'Republican'
+            const queryState = query.state.toUpperCase()
+            let queryArray = []
+            queryArray.push(queryParty)
+            queryArray.push(queryState)
+            if (query.string) queryArray.push(query.string)
+            console.log(queryArray)
+            setQueries(queryArray)
+        }
+
         setIsDataLoading(true);
         const publicdata = axios(
             'https://theunitedstates.io/congress-legislators/legislators-current.json'
@@ -49,7 +63,7 @@ const App = () => {
 
     return (
         <div className={appstyle.app__main}>
-            <BrowseTable data={legislatorData} />
+            <BrowseTable data={legislatorData} queries={queries} />
         </div>
     );
 }

@@ -1,6 +1,4 @@
 export const filterData = (data, filterByState, filterByParty) => {
-
-
     return data.filter((group, i) => {
         if (filterByState == '' && filterByParty !== '') {
             if (group.party == filterByParty) return true

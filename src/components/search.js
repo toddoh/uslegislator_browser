@@ -8,9 +8,20 @@ import { ORIGINAL_DATA, RESTRUCTURED_DATA, PAGINATED_DATA, PAGINATION_NUM, RESTR
 
 import tbl from '~/styles/table.css'
 
-const TableSearch = ({originalData, restructuredData, filterByParty, filterByState }) => {
-    const searchFuzzy = (e) => {
-        const val = e.target.value
+const TableSearch = ({param, originalData, restructuredData, filterByParty, filterByState }) => {
+    const [searchQueryValue, setsearchQueryValue] = useState(null)
+
+    useEffect(() => {
+        if (param) {
+            setsearchQueryValue(param)
+            searchFuzzy(null, param)
+        } 
+    },[param])
+
+    const searchFuzzy = (e, param) => {
+        const val = (e) ? e.target.value : param
+        setsearchQueryValue(val)
+
         if (val == '') {
             let originalArray = filterData(originalData, filterByState, filterByParty)
 
@@ -24,6 +35,7 @@ const TableSearch = ({originalData, restructuredData, filterByParty, filterBySta
             store.dispatch({type: PAGINATION_NUM, state: { data: 0} })
         } else {
             let originalArray = filterData(originalData, filterByState, filterByParty)
+            
             let fuzzyresult = originalArray.reduce((match, legislator) => {
                 let legislatorname = legislator.name.toLowerCase()
                 let searchstring = val.toLowerCase().split(' ')
@@ -56,7 +68,7 @@ const TableSearch = ({originalData, restructuredData, filterByParty, filterBySta
     return (
         <div className={tbl.table__filter_textsearch}>
             <p>Search by name</p>
-            <input type="text" onChange={searchFuzzy} />
+            <input type="text" value={searchQueryValue} onChange={searchFuzzy} />
         </div>
     )
 }
